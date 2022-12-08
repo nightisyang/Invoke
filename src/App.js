@@ -1,64 +1,68 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Instructions from "./components/instructions";
 import "./styles.css";
 
 const App = () => {
   const [firstNumber, setFirstNumber] = useState();
+  const [otherNumbers, setOtherNumbers] = useState([]);
+  const [sum, setSum] = useState();
 
+  // Generate and returns a random number between 1 and 9
+  function randomNumberGenerator() {
+    let number = Math.floor(Math.random() * 9) + 1;
+    return number;
+  }
+
+  // Generate the first number and set it to the firstNumber state
   function generateFirstNumber() {
-    let firstNumber = Math.floor(Math.random() * 9) + 1;
+    let firstNumber = randomNumberGenerator();
     console.log(firstNumber);
     setFirstNumber(firstNumber);
   }
+
+  // Generate the other numbers and set it to the otherNumbers state
+  function generateOtherNumbers() {
+    let otherNumbers = [];
+    for (let i = 0; i < firstNumber; i++) {
+      let str = "";
+      let otherNumber = randomNumberGenerator();
+      for (let j = 0; j < otherNumber; j++) {
+        str += otherNumber.toString();
+      }
+      otherNumbers.push(parseInt(str));
+    }
+    console.log(otherNumbers);
+    setOtherNumbers(otherNumbers);
+  }
+
+  // Sum all the numbers and set it to the sum state
+  function sumAllNumbers() {
+    let sum = 0;
+    for (let i = 0; i < otherNumbers.length; i++) {
+      sum += otherNumbers[i];
+    }
+    console.log(sum + firstNumber);
+    setSum(sum + firstNumber);
+  }
+
+  // triggered when the firstNumber state changes
+  useEffect(() => {
+    // generate the other numbers
+    generateOtherNumbers();
+  }, [firstNumber]);
+
+  // triggered when the otherNumbers state changes
+  useEffect(() => {
+    // sum all the numbers
+    sumAllNumbers();
+  }, [otherNumbers]);
 
   return (
     <div className="container">
       <div className="split">
         <div className="window">
-          <h1>Summation operation of a series of random numbers</h1>
-          <p>Create a web page with ReactJS.</p>
-          <p>
-            A “Start” button for users to trigger a new operation where a series
-            of random numbers between 1 to 9 will be generated.
-          </p>
-          <p>
-            The first number generated will determine the number of subsequent
-            digits to be needed for the sum operation.
-          </p>
-          <p>
-            The output on the page will display the numbers generated and the
-            result of the summation.
-          </p>
-          <p>Example 1:</p>
-          <p>1st number : 4</p>
-          <p>Next four numbers generated : 6, 7, 2, 5</p>
-          <p>666666 + 7777777 + 22 + 55555 = 8500020</p>
-          <p>Example 2:</p>
-          <p> 1st number : 6</p>
-          <p>
-            Next six numbers generated : 3, 2, 1, 7, 8, 2 333 + 22 + 1 + 7777777
-            + 88888888 + 22 = 96667043{" "}
-          </p>
-          <p>Submission instructions: </p>
-          <p>
-            1. Attach a brief description of your code design approach in terms
-            of efficiency and maintainability considerations.{" "}
-          </p>
-          <p>
-            2. Provide details of testing (with test cases) performed on your
-            program.
-          </p>
-          <p>
-            3. Also include the references (eg. online articles, videos) you
-            have accessed to complete the test.
-          </p>
-          <p>
-            4. Deploy the web page and send us the URL to access the live site.
-          </p>
-          <p>
-            5. Upload the code to git and send us the URL to access the repo.
-            Deadline: 5 days
-          </p>
+          <Instructions />
         </div>
         <div className="test">
           <h1>Test</h1>
@@ -67,8 +71,10 @@ const App = () => {
             <button onClick={generateFirstNumber}>
               Generate First Number
             </button>{" "}
-            First number generated: {firstNumber}
+            First number: {firstNumber}
           </span>
+          <div>Other numbers: {otherNumbers.map((number) => number + " ")}</div>
+          <div>Sum of all numbers: {sum}</div>
         </div>
       </div>
     </div>
