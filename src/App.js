@@ -3,19 +3,16 @@ import { useState, useEffect } from "react";
 import "./styles.css";
 
 import Instructions from "./components/instructions";
-import { generateRepeatedNumbers } from "./functions/functions";
+import {
+  generateRepeatedNumbers,
+  randomNumberGenerator,
+} from "./functions/functions";
 
 const App = () => {
   const [firstNumber, setFirstNumber] = useState();
   const [otherNumbers, setOtherNumbers] = useState([]);
   const [repeatedNumbers, setrepeatedNumbers] = useState([]);
   const [sum, setSum] = useState();
-
-  // Generate and returns a random number between 1 and 9
-  function randomNumberGenerator() {
-    let number = Math.floor(Math.random() * 9) + 1;
-    return number;
-  }
 
   // Generate the first number and set it to the firstNumber state
   function generateFirstNumber() {
