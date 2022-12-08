@@ -6,10 +6,17 @@ export function randomNumberGenerator() {
 
 // Generate repeated numbers
 export function generateRepeatedNumbers(num) {
-  let str = "";
-  for (let i = 0; i < num; i++) {
-    str += num.toString();
-  }
+  const numMap = {
+    1: 1,
+    2: 22,
+    3: 333,
+    4: 4444,
+    5: 55555,
+    6: 666666,
+    7: 7777777,
+    8: 88888888,
+    9: 999999999,
+  };
 
-  return parseInt(str);
+  return numMap[num];
 }
