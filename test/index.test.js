@@ -40,12 +40,7 @@ describe("randomNumberGenerator returns a random number between 1 and 9", () => 
     for (let i = 0; i < 10000; i++) {
       const result = randomNumberGenerator();
 
-      if (result > 9 || result < 1) {
-        itWorks = false;
-        break;
-      }
-
-      if (!Number.isInteger(result)) {
+      if (result > 9 || result < 1 || !Number.isInteger(result)) {
         itWorks = false;
         break;
       }

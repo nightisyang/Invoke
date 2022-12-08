@@ -1,9 +1,10 @@
 .container {
-  background-color: pink;
+  /* background-color: pink; */
 }
 
 .split {
   display: flex;
+  justify-content: center;
 }
 
 .window {
@@ -13,9 +14,15 @@
   padding: 0.5rem;
 }
 
-.test {
+.submission {
   width: 50%;
   height: 100%;
-  background-color: rgb(155, 108, 157);
   padding: 0.5rem;
+  background-color: aquamarine;
+  border-radius: 1rem;
+}
+
+.test {
+  min-height: 250px;
+  /* background-color: rgb(155, 108, 157); */
 }

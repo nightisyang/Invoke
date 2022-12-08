@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "./styles.css";
 
 import Instructions from "./components/instructions";
+import Info from "./components/info";
 import {
   generateRepeatedNumbers,
   randomNumberGenerator,
@@ -55,34 +56,37 @@ const App = () => {
   return (
     <div className="container">
       <div className="split">
-        <div className="window">
+        {/* <div className="window">
           <Instructions />
-        </div>
-        <div className="test">
-          <h1>Summation</h1>
-          <div>Press to generate a series of random numbers: </div>
-          <button onClick={generateAndSetFirstNumber}>Start</button>
-          <br></br>
-          {firstNumber ? (
-            <>
-              <br></br>
-              <div>First number: {firstNumber}</div>
-              <div>
-                Next {otherNumbers.length} numbers generated:{" "}
-                {otherNumbers.join(", ")}
-              </div>
-              <br></br>
-              <div>Sum of all numbers: </div>
-              <div>
-                {repeatedNumbers.join(" + ")} = {sum}
-              </div>
-            </>
-          ) : (
-            <>
-              <br></br>
-              <div>Waiting for first number to be generated...</div>
-            </>
-          )}
+        </div> */}
+        <div className="submission">
+          <div className="test">
+            <h1>Summation</h1>
+            <div>Press to generate a series of random numbers: </div>
+            <button onClick={generateAndSetFirstNumber}>Start</button>
+            <br></br>
+            {firstNumber ? (
+              <>
+                <br></br>
+                <div>First number: {firstNumber}</div>
+                <div>
+                  Next {otherNumbers.length} numbers generated:{" "}
+                  {otherNumbers.join(", ")}
+                </div>
+                <br></br>
+                <div>Sum of all numbers: </div>
+                <div>
+                  {repeatedNumbers.join(" + ")} = {sum}
+                </div>
+              </>
+            ) : (
+              <>
+                <br></br>
+                <div>Waiting for first number to be generated...</div>
+              </>
+            )}
+          </div>
+          <Info />
         </div>
       </div>
     </div>
