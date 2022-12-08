@@ -15,14 +15,14 @@ const App = () => {
   const [sum, setSum] = useState();
 
   // Generate the first number and set it to the firstNumber state
-  function generateFirstNumber() {
+  function generateAndSetFirstNumber() {
     let firstNumber = randomNumberGenerator();
     console.log(firstNumber);
     setFirstNumber(firstNumber);
   }
 
   // Generate the other numbers, repeated numbers and set it to respective state
-  function generateOtherNumbers(num) {
+  function generateAndSetOtherNumbers(num) {
     let generatedNumbers = [];
     let repeatedNumArr = [];
 
@@ -43,12 +43,12 @@ const App = () => {
   // triggered when the firstNumber state changes
   useEffect(() => {
     // generate the other numbers, setOtherNumbers and setrepeatedNumbers
-    generateOtherNumbers(firstNumber);
+    generateAndSetOtherNumbers(firstNumber);
   }, [firstNumber]);
 
   // triggered when the otherNumbers state changes
   useEffect(() => {
-    // sum all the numbers
+    // sum all the numbers and setSum
     setSum(repeatedNumbers.reduce((a, b) => a + b, 0));
   }, [repeatedNumbers]);
 
@@ -61,7 +61,7 @@ const App = () => {
         <div className="test">
           <h1>Summation</h1>
           <div>Press to generate a series of random numbers: </div>
-          <button onClick={generateFirstNumber}>Start</button>
+          <button onClick={generateAndSetFirstNumber}>Start</button>
           <br></br>
           {firstNumber ? (
             <>
