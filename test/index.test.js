@@ -34,13 +34,18 @@ describe("generateRepeatedNumbers takes in an integer n that returns an integer 
 });
 
 describe("randomNumberGenerator returns a random number between 1 and 9", () => {
-  it("should return a number between 1 and 9", () => {
+  it("should return a number between 1 and 9 in all 10,000 passes", () => {
     let itWorks = true;
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 10000; i++) {
       const result = randomNumberGenerator();
 
       if (result > 9 || result < 1) {
+        itWorks = false;
+        break;
+      }
+
+      if (!Number.isInteger(result)) {
         itWorks = false;
         break;
       }
