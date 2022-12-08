@@ -1,7 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Instructions from "./components/instructions";
 import "./styles.css";
+
+import Instructions from "./components/instructions";
+import { generateRepeatedNumbers } from "./functions/functions";
 
 const App = () => {
   const [firstNumber, setFirstNumber] = useState();
@@ -41,16 +43,6 @@ const App = () => {
     setrepeatedNumbers(repeatedNumArr);
   }
 
-  // Generate the repeated numbers
-  function generateRepeatedNumbers(num) {
-    let str = "";
-    for (let i = 0; i < num; i++) {
-      str += num.toString();
-    }
-
-    return parseInt(str);
-  }
-
   // triggered when the firstNumber state changes
   useEffect(() => {
     // generate the other numbers, setOtherNumbers and setrepeatedNumbers
@@ -71,25 +63,28 @@ const App = () => {
         </div>
         <div className="test">
           <h1>Summation</h1>
-          <span>
-            {" "}
-            Press to generate a series of random numbers:{" "}
-            <button onClick={generateFirstNumber}>Start</button>
-          </span>
+          <div>Press to generate a series of random numbers: </div>
+          <button onClick={generateFirstNumber}>Start</button>
+          <br></br>
           {firstNumber ? (
             <>
+              <br></br>
               <div>First number: {firstNumber}</div>
               <div>
                 Next {otherNumbers.length} numbers generated:{" "}
                 {otherNumbers.join(", ")}
               </div>
+              <br></br>
               <div>Sum of all numbers: </div>
               <div>
                 {repeatedNumbers.join(" + ")} = {sum}
               </div>
             </>
           ) : (
-            <div>Waiting for first number to be generated...</div>
+            <>
+              <br></br>
+              <div>Waiting for first number to be generated...</div>
+            </>
           )}
         </div>
       </div>
