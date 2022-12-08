@@ -6,6 +6,7 @@ import "./styles.css";
 const App = () => {
   const [firstNumber, setFirstNumber] = useState();
   const [otherNumbers, setOtherNumbers] = useState([]);
+  const [repeatedNumbers, setrepeatedNumbers] = useState([]);
   const [sum, setSum] = useState();
 
   // Generate and returns a random number between 1 and 9
@@ -21,42 +22,46 @@ const App = () => {
     setFirstNumber(firstNumber);
   }
 
-  // Generate the other numbers and set it to the otherNumbers state
-  function generateOtherNumbers() {
-    let otherNumbers = [];
-    for (let i = 0; i < firstNumber; i++) {
-      let str = "";
+  // Generate the other numbers, repeated numbers and set it to respective state
+  function generateOtherNumbers(num) {
+    let generatedNumbers = [];
+    let repeatedNumArr = [];
+
+    for (let i = 0; i < num; i++) {
       let otherNumber = randomNumberGenerator();
-      for (let j = 0; j < otherNumber; j++) {
-        str += otherNumber.toString();
-      }
-      otherNumbers.push(parseInt(str));
+      let repeatedNum = generateRepeatedNumbers(otherNumber);
+
+      generatedNumbers.push(otherNumber);
+      repeatedNumArr.push(repeatedNum);
     }
-    console.log(otherNumbers);
-    setOtherNumbers(otherNumbers);
+
+    console.log(generatedNumbers);
+    console.log(repeatedNumArr);
+    setOtherNumbers(generatedNumbers);
+    setrepeatedNumbers(repeatedNumArr);
   }
 
-  // Sum all the numbers and set it to the sum state
-  function sumAllNumbers() {
-    let sum = 0;
-    for (let i = 0; i < otherNumbers.length; i++) {
-      sum += otherNumbers[i];
+  // Generate the repeated numbers
+  function generateRepeatedNumbers(num) {
+    let str = "";
+    for (let i = 0; i < num; i++) {
+      str += num.toString();
     }
-    console.log(sum + firstNumber);
-    setSum(sum + firstNumber);
+
+    return parseInt(str);
   }
 
   // triggered when the firstNumber state changes
   useEffect(() => {
-    // generate the other numbers
-    generateOtherNumbers();
+    // generate the other numbers, setOtherNumbers and setrepeatedNumbers
+    generateOtherNumbers(firstNumber);
   }, [firstNumber]);
 
   // triggered when the otherNumbers state changes
   useEffect(() => {
     // sum all the numbers
-    sumAllNumbers();
-  }, [otherNumbers]);
+    setSum(repeatedNumbers.reduce((a, b) => a + b, 0));
+  }, [repeatedNumbers]);
 
   return (
     <div className="container">
@@ -65,16 +70,27 @@ const App = () => {
           <Instructions />
         </div>
         <div className="test">
-          <h1>Test</h1>
+          <h1>Summation</h1>
           <span>
             {" "}
-            <button onClick={generateFirstNumber}>
-              Generate First Number
-            </button>{" "}
-            First number: {firstNumber}
+            Press to generate a series of random numbers:{" "}
+            <button onClick={generateFirstNumber}>Start</button>
           </span>
-          <div>Other numbers: {otherNumbers.map((number) => number + " ")}</div>
-          <div>Sum of all numbers: {sum}</div>
+          {firstNumber ? (
+            <>
+              <div>First number: {firstNumber}</div>
+              <div>
+                Next {otherNumbers.length} numbers generated:{" "}
+                {otherNumbers.join(", ")}
+              </div>
+              <div>Sum of all numbers: </div>
+              <div>
+                {repeatedNumbers.join(" + ")} = {sum}
+              </div>
+            </>
+          ) : (
+            <div>Waiting for first number to be generated...</div>
+          )}
         </div>
       </div>
     </div>

@@ -23,10 +23,8 @@ export default function Instructions() {
       <p>666666 + 7777777 + 22 + 55555 = 8500020</p>
       <p>Example 2:</p>
       <p> 1st number : 6</p>
-      <p>
-        Next six numbers generated : 3, 2, 1, 7, 8, 2 333 + 22 + 1 + 7777777 +
-        88888888 + 22 = 96667043{" "}
-      </p>
+      <p>Next six numbers generated : 3, 2, 1, 7, 8, 2</p>
+      <p>333 + 22 + 1 + 7777777 + 88888888 + 22 = 96667043 </p>
       <p>Submission instructions: </p>
       <p>
         1. Attach a brief description of your code design approach in terms of
